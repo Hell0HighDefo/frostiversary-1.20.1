@@ -1,33 +1,24 @@
-// Made with Blockbench 4.9.1
-// Exported for Minecraft version 1.17 or later with Mojang mappings
-// Paste this class into your mod and generate all required imports
-
-
 import net.minecraft.entity.Entity;
 
-public class DarkFountainModel<T extends Entity> extends EntityModel<T> {
+// Made with Blockbench 4.9.1
+// Exported for Minecraft version 1.17+ for Yarn
+// Paste this class into your mod and generate all required imports
+public class DarkFountainModel extends EntityModel<Entity> {
 	private final ModelPart beam;
-
 	public DarkFountainModel(ModelPart root) {
 		this.beam = root.getChild("beam");
 	}
-
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
-
-		PartDefinition beam = partdefinition.addOrReplaceChild("beam", CubeListBuilder.create().texOffs(0, 0).addBox(-10.0F, -5120.0F, -10.0F, 20.0F, 5120.0F, 20.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
-
-		return LayerDefinition.create(meshdefinition, 80, 5140);
+	public static TexturedModelData getTexturedModelData() {
+		ModelData modelData = new ModelData();
+		ModelPartData modelPartData = modelData.getRoot();
+		ModelPartData beam = modelPartData.addChild("beam", ModelPartBuilder.create().uv(0, 0).cuboid(-10.0F, -5120.0F, -10.0F, 20.0F, 5120.0F, 20.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+		return TexturedModelData.of(modelData, 80, 5140);
 	}
-
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+	public void setAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 	}
-
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		beam.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
+		beam.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
 	}
 }
