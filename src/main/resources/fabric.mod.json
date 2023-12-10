@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "frostiversary",
+	"version": "${version}",
+	"name": "frostiversary",
+	"description": "Mod for Aspen's Twitch anniversary server.",
+	"authors": [
+		"Hell0HD"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/frostiversary/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"hell0hd.frostiversary.Frostiversary"
+		],
+		"client": [
+			"hell0hd.frostiversary.FrostiversaryClient"
+		]
+	},
+	"mixins": [
+		"frostiversary.mixins.json",
+		{
+			"config": "frostiversary.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.0",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
